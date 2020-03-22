@@ -2,7 +2,7 @@
 //.api.get.match.matchListByAccountId[.api.host`euw;"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
 //.api.get.match.matchListBySummonerName[.api.host`euw;"Tenadoul"]`matches
 
-.api.key:"RGAPI-e1fb5415-f0b3-4499-935a-427e6a2e749c";
+.api.key:"RGAPI-385d4f35-805b-4c3a-a585-72276058e7df";
 .api.host:`euw`na!("euw1.api.riotgames.com";"na1.api.riotgames.com");
 
 .api.status:"/lol/status/v3/shard-data/";
