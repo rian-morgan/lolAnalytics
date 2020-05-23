@@ -22,18 +22,18 @@ else
 fi
 
 readproc() {
-    awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load
+    awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load                    # read processes and parameters
     do
-      echo "$host $port $proctype $procname $load"
+      echo "$host $port $proctype $procname $load"                                                  # print processes to console
     done 
 }
 
 start() {
-    awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load
+    awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load                    # read processes and parameters
     do
       echo "$host $port $proctype $procname $load"
-      sline="rlwrap -r ${QHOME}/m64/q ${load} -p ${port}"
-      eval "${sline} > '${RITOLOG}/${procname}.log' 2>&1 &"
+      sline="rlwrap -r ${QHOME}/m64/q ${load} -p ${port}"                                           # build run cmd for each process
+      eval "${sline} > '${RITOLOG}/${procname}.log' 2>&1 &"                                         # run cmd for each process
     done
 }
 
