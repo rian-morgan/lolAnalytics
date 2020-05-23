@@ -1,0 +1,48 @@
+Require library initialised [ Root: :/Users/rianmorgan/Documents/lolDiscordBot ]
+Library root location refreshed [ File Count: 329 ]
+Loading library: log
+Loading /Users/rianmorgan/Documents/lolDiscordBot/src/log.q
+Loading library: util
+Loading /Users/rianmorgan/Documents/lolDiscordBot/src/util.q
+Loading library: type
+Loading /Users/rianmorgan/Documents/lolDiscordBot/src/type.q
+Library initialisation function detected [ Func: .type.init ]
+Initialised library: type
+Loading library: time
+Loading /Users/rianmorgan/Documents/lolDiscordBot/src/time.q
+Loading /Users/rianmorgan/Documents/lolDiscordBot/src/time.util.q
+Library initialisation function detected [ Func: .log.init ]
+
+Logging enabled [ Level: INFO ] [ Current Logger: `.log.loggers.basic ]
+
+2020.05.23 00:13:35.485 INFO pid-13556 rianmorgan 0 Initialised library: log
+2020.05.23 00:13:35.485 INFO pid-13556 rianmorgan 0 Loading library: riot.utils
+2020.05.23 00:13:35.485 INFO pid-13556 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.utils.q
+2020.05.23 00:13:35.486 INFO pid-13556 rianmorgan 0 Loading library: riot.api
+2020.05.23 00:13:35.487 INFO pid-13556 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.api.q
+2020.05.23 00:13:35.489 INFO pid-13556 rianmorgan 0 Loading library: riot.metaData
+2020.05.23 00:13:35.489 INFO pid-13556 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.metaData.q
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  133k  100  133k    0     0   204k      0 --:--:-- --:--:-- --:--:--  204k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   949  100   949    0     0   1312      0 --:--:-- --:--:-- --:--:--  1310100   949  100   949    0     0   1310      0 --:--:-- --:--:-- --:--:--  1308
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 12997  100 12997    0     0  21376      0 --:--:-- --:--:-- --:--:-- 21376
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1600  100  1600    0     0   2588      0 --:--:-- --:--:-- --:--:--  2584
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1749  100  1749    0     0   2890      0 --:--:-- --:--:-- --:--:--  2886100  1749  100  1749    0     0   2886      0 --:--:-- --:--:-- --:--:--  2881
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   281  100   281    0     0    398      0 --:--:-- --:--:-- --:--:--   398
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  214k  100  214k    0     0   336k      0 --:--:-- --:--:-- --:--:--  336k
+2020.05.23 00:13:56.303 INFO pid-13556 system 7 message
+2020.05.23 00:14:26.654 WARN pid-13556 system 7 message
+2020.05.23 00:14:38.437 ERROR pid-13556 system 7 message

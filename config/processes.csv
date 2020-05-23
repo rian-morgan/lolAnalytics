@@ -1,0 +1,2 @@
+host, port, proctype, procname, load
+localhost, 5000, rdb, lolStats.rdb.0, ${RITOQ}/loader.q

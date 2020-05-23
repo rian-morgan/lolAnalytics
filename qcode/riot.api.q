@@ -2,7 +2,7 @@
 //.api.get.match.matchListByAccountId[.api.host`euw;"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
 //.api.get.match.matchListBySummonerName[.api.host`euw;"Tenadoul"]`matches
 
-.api.key:"RGAPI-385d4f35-805b-4c3a-a585-72276058e7df";
+.api.key:"RGAPI-1907148d-6fa6-4cf2-9a64-f20df7b71378";
 .api.host:`euw`na!("euw1.api.riotgames.com";"na1.api.riotgames.com");
 
 .api.status:"/lol/status/v3/shard-data/";
@@ -47,8 +47,11 @@ region:.api.host`euw;
     .util.saveTable[.discord.accountMx;"lolAccountMx";getenv[`RITODATA]];
     };
 
-.discord.loadAccountMx:{ // check this func it might b fucked
-    $[not ()~tab:hsym`$getenv[`RITODATA],"\\lolAccountMx";.discord.accountMx: get tab;.discord.accountMx:([discordId:`$()]lolAccount:"C"$();lolRegion:`$())]};
+.discord.loadAccountMx:{ 
+    @[{.discord.accountMx:get hsym`$getenv[`RITODATA],"\\lolAccountMx"};
+    ::;
+    {.discord.accountMx:([discordId:`$()]lolAccount:"C"$();lolRegion:`$())}]
+    };
 
 
 
