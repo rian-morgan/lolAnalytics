@@ -1,45 +1,0 @@
-Require library initialised [ Root: :/Users/rianmorgan/Documents/lolDiscordBot ]
-Library root location refreshed [ File Count: 331 ]
-Loading library: log
-Loading /Users/rianmorgan/Documents/lolDiscordBot/src/log.q
-Loading library: util
-Loading /Users/rianmorgan/Documents/lolDiscordBot/src/util.q
-Loading library: type
-Loading /Users/rianmorgan/Documents/lolDiscordBot/src/type.q
-Library initialisation function detected [ Func: .type.init ]
-Initialised library: type
-Loading library: time
-Loading /Users/rianmorgan/Documents/lolDiscordBot/src/time.q
-Loading /Users/rianmorgan/Documents/lolDiscordBot/src/time.util.q
-Library initialisation function detected [ Func: .log.init ]
-
-Logging enabled [ Level: INFO ] [ Current Logger: `.log.loggers.basic ]
-
-2020.05.23 17:49:01.446 INFO pid-14494 rianmorgan 0 Initialised library: log
-2020.05.23 17:49:01.446 INFO pid-14494 rianmorgan 0 Loading library: riot.utils
-2020.05.23 17:49:01.447 INFO pid-14494 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.utils.q
-2020.05.23 17:49:01.447 INFO pid-14494 rianmorgan 0 Loading library: riot.api
-2020.05.23 17:49:01.447 INFO pid-14494 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.api.q
-2020.05.23 17:49:01.448 INFO pid-14494 rianmorgan 0 Loading library: riot.metaData
-2020.05.23 17:49:01.448 INFO pid-14494 rianmorgan 0 Loading /Users/rianmorgan/Documents/lolDiscordBot/qcode/riot.metaData.q
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  133k  100  133k    0     0  1170k      0 --:--:-- --:--:-- --:--:-- 1170k
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   949  100   949    0     0   9885      0 --:--:-- --:--:-- --:--:--  9885
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 12997  100 12997    0     0   302k      0 --:--:-- --:--:-- --:--:--  302k
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1600  100  1600    0     0  37209      0 --:--:-- --:--:-- --:--:-- 37209
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  1749  100  1749    0     0   8573      0 --:--:-- --:--:-- --:--:--  8531
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   281  100   281    0     0   4194      0 --:--:-- --:--:-- --:--:--  4257
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  214k  100  214k    0     0   470k      0 --:--:-- --:--:-- --:--:--  470k

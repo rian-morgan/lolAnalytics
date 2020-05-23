@@ -13,6 +13,7 @@ export RITODATA=${RITOHOME}/data
 export RITOBIN=${RITOHOME}/bin
 export RITOCONFIG=${RITOHOME}/config
 export CSVPATH=${RITOCONFIG}/processes.csv
+export RITOLOG=${RITOHOME}/logs
 export KDBLIB='~/q'
 export KDBPATH=${KDBLIB}/m64
 export KDBSRC=${RITOHOME}/src
