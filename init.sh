@@ -24,28 +24,59 @@ fi
 readproc() {
     awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load                    # read processes and parameters
     do
-      echo "$host $port $proctype $procname $load"                                                  # print processes to console
-    done 
+      port=$(eval "echo $port")
+      load=$(eval "echo $load")
+      #echo "$host $port $proctype $procname $load"                                                  # print processes to console
+      args="-stackid ${RITOBASEPORT} -proctype $proctype -procname $procname"
+      pid="pgrep -f \"\\$args\""
+
+      rlr="rlwrap -r "
+      sline="${QHOME}/m64/q ${load} $args -p ${port}" 
+      #ßecho $sline
+      rtrn="$rtrn\n$host $port $proctype $procname $load $(eval $pid)"
+
+    done
+    echo $rtrn
 }
 
 start() {
     awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load                    # read processes and parameters
     do
+      port=$(eval "echo $port")                                                                     # show port number
+      load=$(eval "echo $load")                                                                     # show full path
       echo "$host $port $proctype $procname $load"
-      sline="rlwrap -r ${QHOME}/m64/q ${load} -p ${port}"                                           # build run cmd for each process
+      args="-stackid ${RITOBASEPORT} -proctype $proctype -procname $procname"
+      sline="rlwrap -r ${QHOME}/m64/q ${load} $args -p ${port}"                                     # build run cmd for each process
       eval "${sline} > '${RITOLOG}/${procname}.log' 2>&1 &"                                         # run cmd for each process
     done
 }
+
+stop() {
+  awk 'NR>1' $CSVPATH | while IFS=',' read -r host port proctype procname load                    # read processes and parameters
+  do
+    port=$(eval "echo $port")
+    load=$(eval "echo $load")
+    #echo "$host $port $proctype $procname $load"                                                  # print processes to console
+    args="-stackid ${RITOBASEPORT} -proctype $proctype -procname $procname"
+    pid="pkill -f \"\\$args\""
+    eval $pid
+  done
+}
+
+ 
 
 case $1 in
   start)
     start "$*";
     ;;
-  readprocs)
+  showprocs)
     readproc "$*";
     ;;
   "")
     usage
+    ;;
+  stop)
+    stop "$*";
     ;;
   *)
     echo "ERROR: Invalid argument(s)"
