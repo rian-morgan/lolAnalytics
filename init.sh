@@ -41,11 +41,12 @@ start() {
     do
       port=$(eval "echo $port")                                                                     # show port number
       load=$(eval "echo $load")                                                                     # show full path
-      echo "$host $port $proctype $procname $load"
+      #echo "$host $port $proctype $procname $load"
       args="-stackid ${RITOBASEPORT} -proctype $proctype -procname $procname"
       sline="rlwrap -r ${QHOME}/m64/q ${load} $args -p ${port}"                                     # build run cmd for each process
       eval "${sline} > '${RITOLOG}/${procname}.log' 2>&1 &"                                         # run cmd for each process
     done
+  readproc "$*"
 }
 
 stop() {
