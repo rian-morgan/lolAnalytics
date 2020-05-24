@@ -27,6 +27,19 @@ function redirectMessage(message) {
     });
 };
 
+function el(message,embedder) {
+    socket.addEventListener('message', function _sendData(event) {
+        //data = (event.data);
+        data = JSON.parse(event.data);
+        console.log(data);
+        embeddedMsg = embedder(data);
+        console.log(embeddedMsg);
+        message.channel.send({embed: embeddedMsg});
+        socket.removeEventListener('message', _sendData, true);
+    });  
+}
+
 exports.socket = socket;
 exports.redirectMessage = redirectMessage;
+exports.el = el;
 

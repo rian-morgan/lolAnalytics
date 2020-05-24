@@ -46,11 +46,6 @@ client.on('message', message => {
     }
 });
 
-
-
 // Get client's auth token from .env and login to to Discord
 const TOKEN = process.env.TOKEN;
 client.login(TOKEN);
-
-
-

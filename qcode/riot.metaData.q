@@ -6,7 +6,9 @@ maps:.util.parseCurl["http://static.developer.riotgames.com/docs/lol/maps.json";
 gameModes:.util.parseCurl["http://static.developer.riotgames.com/docs/lol/gameModes.json";.api.key];
 gameTypes:.util.parseCurl["http://static.developer.riotgames.com/docs/lol/gameTypes.json";.api.key];
 items:.util.parseCurl["http://ddragon.leagueoflegends.com/cdn/10.5.1/data/en_US/item.json";.api.key];
-
+.asset.champion.square:{[champion]
+	.util.parseCurl["http://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/",champion,".png";.api.key]
+	};
 
 .discord.bot.token:`Njg2MzA1ODI4MDIxNjAwMjc5.XmVSQQ.L3ex1s2ygK4ipHKsITcRMLqG2bQ;
 
