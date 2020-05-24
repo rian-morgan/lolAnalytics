@@ -29,11 +29,8 @@ readproc() {
       #echo "$host $port $proctype $procname $load"                                                  # print processes to console
       args="-stackid ${RITOBASEPORT} -proctype $proctype -procname $procname"
       pid="pgrep -f \"\\$args\""
-
-      rlr="rlwrap -r "
       sline="${QHOME}/m64/q ${load} $args -p ${port}" 
-      #ßecho $sline
-      rtrn="$rtrn\n$host $port $proctype $procname $load $(eval $pid)"
+      rtrn="$rtrn$host $port $proctype $procname $load $(eval $pid)\n"
 
     done
     echo $rtrn
