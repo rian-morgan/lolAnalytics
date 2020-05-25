@@ -1,5 +1,5 @@
 //.api.get.summoner.byName[.api.host`euw;"Tenadoul"]
-//.api.get.match.matchListByAccountId[.api.host`euw;"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
+//.api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
 //.api.get.match.matchListBySummonerName[.api.host`euw;"Tenadoul"]`matches
 
 .api.key:"RGAPI-1907148d-6fa6-4cf2-9a64-f20df7b71378";
@@ -21,11 +21,15 @@ region:.api.host`euw;
     d
     };
 
-.api.get.match.matchListByAccountId:{[region;accountId]
+// .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:enlist[`champion]!enlist[86]]
+.api.get.match.matchListByAccountId:{[region;accountId;filters]
     req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
-    query:"api_key=",.api.key;
-    d:.j.k raze raze string system"curl -G ",req," -d ",query;
-    k:select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from d`matches;
+    q:$[0=count value[filters];
+        "";
+        "-d ",-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")];
+    query:q;
+    d:.j.k raze system"curl -G ",req," -H 'X-Riot-Token:",.api.key,"' ",query;
+    k:select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from d[`matches];
     d[`matches]:k;
     d
     };
@@ -42,22 +46,26 @@ region:.api.host`euw;
     d:.j.k raze raze string system"curl -G ",req," -d ",query;
     d
     };
+    
+// .discord.setAccountMx[x:`$"278255127393992704";y:`$"Tenadoul";z:`euw]
 // TODO make region always lowercase
-.discord.setAccountMx:{[x;y;z]`.discord.accountMx upsert ([discordId:enlist x]lolAccount:enlist y;lolRegion:enlist z);
+.discord.setAccountMx:{[x;y;z]
+    `.discord.accountMx upsert ([discordId:enlist x]lolAccount:enlist y;lolRegion:enlist z);
     .util.saveTable[.discord.accountMx;"lolAccountMx";getenv[`RITODATA]];
     };
 
+// .discord.loadAccountMx[]
 .discord.loadAccountMx:{ 
     @[{.discord.accountMx:get hsym`$getenv[`RITODATA],"\\lolAccountMx"};
     ::;
-    {.discord.accountMx:([discordId:`$()]lolAccount:"C"$();lolRegion:`$())}]
+    {.discord.accountMx:([discordId:`$()]lolAccount:`$();lolRegion:`$())}]
     };
 
 
 
 // .discord.get.summoner.byName id:`278255127393992704
 .discord.get.summoner.byName:{[id]
-    name:.discord.accountMx[id]`lolAccount;
+    name:string .discord.accountMx[id]`lolAccount;
     region:.api.host .discord.accountMx[id]`lolRegion;
     .api.get.summoner.byName[region;name]};
     

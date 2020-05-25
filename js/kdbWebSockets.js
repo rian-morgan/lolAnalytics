@@ -19,10 +19,9 @@ socket.addEventListener('message', function (event) {
 // this function is used to setup an event listener and redirect the kdb response to bot
 function redirectMessage(message) {
     socket.addEventListener('message', function _sendData(event) {
-        //data = (event.data);
-        data = JSON.parse(event.data);
+        data = (event.data);
         console.log(data);
-        message.channel.send({embed: JSON.parse(event.data)});
+        message.channel.send(data);
         socket.removeEventListener('message', _sendData, true);
     });
 };
