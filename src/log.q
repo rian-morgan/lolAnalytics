@@ -53,7 +53,8 @@
     / setLogger calls setLevel
     .log.setLogger[];
 
-    .log.process:`$"pid-",string .z.i;
+    //.log.process:`$"pid-",string .z.i;
+    .log.process:`$(raze each .Q.opt .z.x)[`procname];
  };
 
 

@@ -2,7 +2,7 @@
 //.api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
 //.api.get.match.matchListBySummonerName[.api.host`euw;"Tenadoul"]`matches
 
-.api.key:"RGAPI-1907148d-6fa6-4cf2-9a64-f20df7b71378";
+.api.key:"RGAPI-8d7391fe-fba9-4bb3-b367-f868137b769c";
 .api.host:`euw`na!("euw1.api.riotgames.com";"na1.api.riotgames.com");
 
 .api.status:"/lol/status/v3/shard-data/";
@@ -40,10 +40,18 @@ region:.api.host`euw;
     d
     };
 
+// game:.api.get.match[region:.api.host[`euw];matchId:"4499685625"]    
+.api.get.match.byMatchId:{[region;matchId]
+    req:"https://",region,.api.match,"/matches/",matchId;
+    query:"api_key=",.api.key;
+    d:.j.k raze system"curl -G ",req," -d ",query;
+    d
+    };
+    
 .api.get.matchTimelines:{[region;matchId]
     req:"https://",region,.api.match,"/timelines/by-match/",matchId;
     query:"api_key=",.api.key;
-    d:.j.k raze raze string system"curl -G ",req," -d ",query;
+    d:.j.k raze system"curl -G ",req," -d ",query;
     d
     };
     

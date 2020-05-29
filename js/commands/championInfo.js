@@ -27,7 +27,7 @@ module.exports = {
             thumbnail:{url: 'http://ddragon.leagueoflegends.com/cdn/10.6.1/img/champion/'+args+'.png'},
             fields:[{
                 name:'Synopsis',
-                value:data.blurb
+                value:data.lore
             },
             ]
             };

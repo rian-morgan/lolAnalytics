@@ -21,3 +21,9 @@ system"l ",getenv[`KDBSRC],"/require.q"
 .require.lib `riot.utils;
 .require.lib `riot.api;
 .require.lib `riot.metaData;
+
+// LoL account data for discord users
+.discord.loadAccountMx[];
+
+// load champion metadata
+.champion.metaLoad[];
