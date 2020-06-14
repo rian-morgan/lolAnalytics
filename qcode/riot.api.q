@@ -41,6 +41,7 @@
 .api.get.match.byMatchId:{[region;matchId]
     req:"https://",region,.api.match,"/matches/",matchId;
     query:"api_key=",.api.key;
+    .log.info["requesting match data for matchId: ",matchId];
     d:.j.k raze system"curl -G ",req," -d ",query;
     d
     };
