@@ -1,10 +1,14 @@
 // Schema for match statistics table
+// used to check columns in .match.stats.get
+// new columns must be added here before changing .match.stats.get
+
 .match.stats.schema:{
     tt:flip 2 cut (
         `participantId                  ; `long$() ;     
         `summonerName                   ; "" ;           
         `accountId                      ; `symbol$() ;   
-        `gameId                         ; `symbol$() ;   
+        `gameId                         ; `symbol$() ;
+        `championId                     ; `long$() ;   
         `win                            ; `boolean$() ;  
         `item0                          ; "" ;           
         `item1                          ; "" ;           

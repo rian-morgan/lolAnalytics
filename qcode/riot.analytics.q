@@ -1,6 +1,6 @@
 // Generation of match statistics and analytics 
     
-// m:.match.stats.get[region:.api.host[`euw];matchId:"4499685625"]
+// match:.match.stats.get[region:.api.host[`euw];matchId:"4499685625"]
 .match.stats.get:{[region;matchId]
     match:.api.get.match.byMatchId[region;matchId];
     participantIdentities:match[`participantIdentities];
@@ -28,13 +28,14 @@
     cnt:count matchStats;
     sn:([participantId:1+til cnt] 
         summonerName:{x[`summonerName]}'[(exec player from participantIdentities)];
-        accountId:{`$x[`accountId]}'[(exec player from participantIdentities)]);
+        accountId:{`$x[`accountId]}'[(exec player from participantIdentities)];
+        championId:"j"$exec championId from match[`participants]);
     matchStats:matchStats lj sn;
     cls:exec c from meta[matchStats] where t="f";                   // select any columns with type float, these need to be longs
     matchStats:![matchStats;();0b;cls!({($;"j"),x}'[cls])];         // cast float columns to longs
     missingCols:cols[.match.stats.schema[]] except cols[matchStats];  // check if any columns are missing
     if[not 0=count missingCols;matchStats:matchStats lj 1!update participantId:1+til cnt from cnt#?[.match.stats.schema[];();0b;c!c:`participantId,missingCols]]; // add on missing columns
-    `participantId`summonerName`accountId`gameId xcols matchStats
+    `participantId`summonerName`accountId`gameId`championId xcols matchStats
     };
 
 // px:.player.stats.get[region:.api.host[`euw];accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";games:10;filters:enlist[`champion]!enlist[86]]   
@@ -51,5 +52,8 @@
     /tt:{![x;();0b;y]}'[t;nupd]
     id:`$accountId;
     playerStats:?[uj/[t];enlist (in;`accountId;`id);0b;()];
+    champs:value exec id,championNumber from .champion.meta;
+    champMap:champs[1]!champs[0];
+    playerStats:update champMap@championId from playerStats;
     playerStats
     };
