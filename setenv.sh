@@ -17,9 +17,8 @@ export RITOLOG=${RITOHOME}/logs
 export KDBLIB='~/q'
 export KDBPATH=${KDBLIB}/m64
 export KDBSRC=${RITOHOME}/src
-
 export RLWRAP="rlwrap"
-
 export RITOBASEPORT=5000
+export RITOAPIKEY="RGAPI-f4649bc6-370f-4b7d-b573-eb8b1a01542b"
 
 alias q='~/q rlwrap -r ~/q/m64/q'  

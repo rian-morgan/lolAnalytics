@@ -2,22 +2,19 @@
 //.api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM"]`matches
 //.api.get.match.matchListBySummonerName[.api.host`euw;"Tenadoul"]`matches
 
-.api.key:"RGAPI-8d7391fe-fba9-4bb3-b367-f868137b769c";
+//.api.key:"RGAPI-908028af-4cda-42d8-80bb-c10b1d876332";
+.api.key:getenv[`RITOAPIKEY];
 .api.host:`euw`na!("euw1.api.riotgames.com";"na1.api.riotgames.com");
 
 .api.status:"/lol/status/v3/shard-data/";
 .api.summoners:"/lol/summoner/v4/summoners/";
 .api.match:"/lol/match/v4";
-
-name:"Tenadoul";
-region:.api.host`euw;
-
-
+//name:"Tenadoul"
 .api.get.summoner.byName:{[region;name]
     req:"https://",region,.api.summoners,"by-name/",name;
     query:"api_key=",.api.key;
     d:.j.k raze raze string system"curl -G ",req," -d ",query;
-    d[`revisionDate]:"P"$-3_string `long$d[`revisionDate];
+    d[`revisionDate]:"P"$string `long$d[`revisionDate]; // need a test for this timestamp conversion, riot changed recently
     d
     };
 
@@ -40,7 +37,7 @@ region:.api.host`euw;
     d
     };
 
-// game:.api.get.match[region:.api.host[`euw];matchId:"4499685625"]    
+// game:.api.get.match.byMatchId[region:.api.host[`euw];matchId:"4499685625"]    
 .api.get.match.byMatchId:{[region;matchId]
     req:"https://",region,.api.match,"/matches/",matchId;
     query:"api_key=",.api.key;

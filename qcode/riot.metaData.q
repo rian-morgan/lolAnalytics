@@ -6,7 +6,7 @@
 .dd.gameModes:.util.parseCurl["http://static.developer.riotgames.com/docs/lol/gameModes.json";.api.key];
 .dd.gameTypes:.util.parseCurl["http://static.developer.riotgames.com/docs/lol/gameTypes.json";.api.key];
 .dd.items:.util.parseCurl["http://ddragon.leagueoflegends.com/cdn/",.dd.versions.latest,"/data/en_US/item.json";.api.key];
-
+.cd.runes:.util.parseJson system"curl -G http://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perks.json";
 .dd.getChampionMetaData:{.util.parseCurl["http://ddragon.leagueoflegends.com/cdn/",.dd.versions.latest,"/data/en_US/champion.json";.api.key]};
 
 .champion.schema.meta:flip `id`championNumber`version`name`title`blurb`info`image`tags`partype`stats`key1`skins`lore`allytips`enemytips`spells`passive`recommended!(`$();`int$();"";"";"";"";();();();"";();"";();"";();();();();());   

@@ -11,10 +11,11 @@
 //.z.ws:{neg[.z.w].Q.s value x};
 .z.ws:{k:.j.j @[value;x;{`$ "'",x}];`.ws.queries upsert (.z.w;.z.t;x;k);neg[.z.w]k};
 
-.util.parseJsonToQ:{.j.k raze raze string x};
+
+// JSON manipulation
+.util.parseJson:{.j.k raze raze string x};
 .util.curl:{[x;y]system"curl -G ",x," -d ",y};
-.util.parseCurl:{.util.parseJsonToQ[.util.curl[x;y]]};
+.util.parseCurl:{.util.parseJson[.util.curl[x;y]]};
 
 // save table to disk
 .util.saveTable:{[table;fileName;dir] (hsym `$dir,"/",fileName) set table };
-
