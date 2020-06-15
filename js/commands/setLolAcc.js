@@ -11,7 +11,7 @@ module.exports = {
             lolRegion = `${args[1]}`;
             // return acc/region to user
             message.channel.send(`Lol Account: ${lolAcc}\nLoL Region: ${lolRegion}`)
-            msg = `.discord.setAccountMx[\`$"${id}\";\"${lolAcc}\";\`${lolRegion}]`
+            msg = `.discord.setAccountMx[\`$"${id}\";\`$\"${lolAcc}\";\`${lolRegion}]`
             console.log(msg)
             ws.socket.send(msg)
         } 

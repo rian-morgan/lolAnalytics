@@ -56,7 +56,7 @@
 // .discord.setAccountMx[x:`$"278255127393992704";y:`$"Tenadoul";z:`euw]
 // TODO make region always lowercase
 .discord.setAccountMx:{[x;y;z]
-    `.discord.accountMx upsert ([discordId:enlist x]lolAccount:enlist y;lolRegion:enlist z);
+    `.discord.accountMx upsert ([discordId:enlist x]lolAccount:enlist y;lolRegion:enlist lower z);
     .util.saveTable[.discord.accountMx;"lolAccountMx";getenv[`RITODATA]];
     };
 
@@ -73,6 +73,6 @@
 .discord.get.summoner.byName:{[id]
     name:string .discord.accountMx[id]`lolAccount;
     region:.api.host .discord.accountMx[id]`lolRegion;
-    .api.get.summoner.byName[region;name]};
+    .api.get.summoner.byName[region;name],enlist[`region]!enlist[region]};
     
 

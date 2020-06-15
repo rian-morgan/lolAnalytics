@@ -4,7 +4,9 @@
 .match.stats.get:{[region;matchId]
     match:.api.get.match.byMatchId[region;matchId];
     participantIdentities:match[`participantIdentities];
-    
+    if[0h~type match[`participants];
+        match[`participants]:uj/[enlist each  match[`participants]]];
+
     matchStats:update 
         gameId:`$string"j"$match[`gameId],
         platformId:`$match[`platformId],
@@ -42,7 +44,7 @@
 .player.stats.get:{[region;accountId;games;filters]
     data:.api.get.match.matchListByAccountId[region;accountId;filters];
     matches:data[`matches];
-    matchId:exec gameId from matches;
+    matchId:exec gameId from matches where queue within (400;440); // que cond ensures only 5v5 on summoners rift
     if[not games=0;matchId:games sublist matchId];
     t:.match.stats.get[region;]'[string matchId];
     /cls:distinct raze cols each t;
