@@ -6,9 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/rian-morgan/lolDiscordBot"
+  },
   "author": "Rian Morgan",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^2.9.3",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0"
   }
