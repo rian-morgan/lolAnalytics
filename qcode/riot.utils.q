@@ -9,8 +9,7 @@
 .z.wo:{neg[.z.w]"Hello from Q.";`.ws.active upsert (x;.z.t)};
 .z.wc:{delete from `.ws.active where handle =x};
 //.z.ws:{neg[.z.w].Q.s value x};
-.z.ws:{k:.j.j @[value;x;{`$ "'",x}];`.ws.queries upsert (.z.w;.z.t;x;k);neg[.z.w]k};
-
+.z.ws:{.log.info[x]; k:.j.j @[value;x;{`$ "'",x}];`.ws.queries upsert (.z.w;.z.t;x;k);neg[.z.w]k};
 
 // JSON manipulation
 .util.parseJson:{.j.k raze raze string x};

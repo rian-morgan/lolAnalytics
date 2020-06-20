@@ -85,10 +85,13 @@
     raze each flip select kda:sum[kills + assists]%?[0=sum[deaths];1;sum[deaths]],sum win,games:count i,avgVS:avg[visionScore],avgCS:avg[totalMinionsKilled],distinct championId from stats
     };
  
+ // .discord.myLastMatch[id:`278255127393992704;filters:`]
 .discord.myLastMatch:{[id;filters]
     player:.discord.get.summoner.byName[id]; /id:`278255127393992704 < Tenadoul
     acc:.api.get.summoner.byName[player[`region];player[`name]];
+    champs:value exec id,championNumber from .champion.meta;
+    champMap:champs[0]!champs[1];
     stats:.player.stats.get[player[`region];acc[`accountId];1;enlist[`champion]!enlist[champMap@filters]];
-    raze each flip select kda:(kills+assists)%?[0=sum[deaths];1;sum[deaths]],kda1:{" / " sv string (x;y;z)}'[kills;assists;deaths],result:?[win;`Win;`Loss],cs:totalMinionsKilled,visionScore:visionScore from stats
+    raze each flip select championId,kda:(kills+assists)%?[0=sum[deaths];1;sum[deaths]],kda1:{" / " sv string (x;y;z)}'[kills;assists;deaths],result:?[win;`Win;`Loss],cs:totalMinionsKilled,visionScore:visionScore from stats
     };
     
