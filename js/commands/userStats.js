@@ -11,12 +11,16 @@ module.exports = {
 
                 },
                 fields:[{
-                    name:'KDA',
-                    value:data.kda[0].toString(),   
+                        name:'KDA',
+                        value:data.kda[0].toString(),   
                     },
                     {
                         name:'Wins',
                         value:data.win[0].toString(),
+                    },
+                    {
+                        name:'CS',
+                        value:data.avgCS[0].toString(),
                     },
                 ],
             };

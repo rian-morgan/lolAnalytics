@@ -62,7 +62,7 @@
 
 // .discord.loadAccountMx[]
 .discord.loadAccountMx:{ 
-    @[{.discord.accountMx:get hsym`$getenv[`RITODATA],"\\lolAccountMx"};
+    @[{.discord.accountMx:get hsym`$getenv[`RITODATA],"/lolAccountMx"};
     ::;
     {.discord.accountMx:([discordId:`$()]lolAccount:`$();lolRegion:`$())}]
     };
@@ -74,5 +74,21 @@
     name:string .discord.accountMx[id]`lolAccount;
     region:.api.host .discord.accountMx[id]`lolRegion;
     .api.get.summoner.byName[region;name],enlist[`region]!enlist[region]};
+ 
+// .discord.myStats[id:`278255127393992704;filters:`]   
+.discord.myStats:{[id;filters]
+    player:.discord.get.summoner.byName[id]; /id:`278255127393992704 < Tenadoul
+    acc:.api.get.summoner.byName[player[`region];player[`name]];
+    champs:value exec id,championNumber from .champion.meta;
+    champMap:champs[0]!champs[1];
+    stats:.player.stats.get[player[`region];acc[`accountId];10;enlist[`champion]!enlist[champMap@filters]];
+    raze each flip select kda:sum[kills + assists]%?[0=sum[deaths];1;sum[deaths]],sum win,games:count i,avgVS:avg[visionScore],avgCS:avg[totalMinionsKilled],distinct championId from stats
+    };
+ 
+.discord.myLastMatch:{[id;filters]
+    player:.discord.get.summoner.byName[id]; /id:`278255127393992704 < Tenadoul
+    acc:.api.get.summoner.byName[player[`region];player[`name]];
+    stats:.player.stats.get[player[`region];acc[`accountId];1;enlist[`champion]!enlist[champMap@filters]];
+    raze each flip select kda:(kills+assists)%?[0=sum[deaths];1;sum[deaths]],kda1:{" / " sv string (x;y;z)}'[kills;assists;deaths],result:?[win;`Win;`Loss],cs:totalMinionsKilled,visionScore:visionScore from stats
+    };
     
-

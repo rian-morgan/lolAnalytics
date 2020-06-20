@@ -17,6 +17,7 @@
 // testing require lib
 system"l ",getenv[`KDBSRC],"/require.q"
 .require.init[];
+.require.lib `req_0.1.4;
 .require.lib `log;
 .require.lib `riot.utils;
 .require.lib `riot.api;

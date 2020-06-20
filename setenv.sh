@@ -20,5 +20,10 @@ export KDBSRC=${RITOHOME}/src
 export RLWRAP="rlwrap"
 export RITOBASEPORT=5000
 export RITOAPIKEY="RGAPI-fc5fbcb7-8475-4d22-b158-988628d42cb6"
+export SSL_CERT_FILE=$HOME/Documents/certs/server-crt.pem
+export SSL_KEY_FILE=$HOME/Documents/certs/server-key.pem
+export SSL_CA_CERT_FILE=$HOME/Documents/certs/ca.pem
+export SSL_CA_CERT_PATH=$HOME/Documents/certs
+export SSL_VERIFY_SERVER=NO
 
 alias q='~/q rlwrap -r ~/q/m64/q'  

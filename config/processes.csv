@@ -1,3 +1,4 @@
-host,port,proctype,procname,load
+host,port,proctype,procname,load, params
 localhost,${RITOBASEPORT},rdb,lolStats.rdb.0,${RITOQ}/rdb.q
-localhost,5001,gw,lolStats.gw.0,
+localhost,5001,rdb,lolStats.rdb.1,${RITOQ}/rdb.q
+localhost,5002,gw,lolStats.gw.0,
