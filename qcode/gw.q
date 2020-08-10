@@ -1,0 +1,1 @@
+// lolStats gateway. Webserver should connect to this via api. GW will handle any requests 

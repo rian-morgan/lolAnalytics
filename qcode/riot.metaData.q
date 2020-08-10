@@ -19,7 +19,7 @@
     ver:distinct exec version from .champion.meta;
     if[(not (first ver)~.dd.versions.latest)|(not 1 = count ver);.log.info["New version of metadata available. Rebuilding table."];.champion.metaUpdate[]];
     .log.info[".champion.meta table loaded."];
-    .champion.metaSave[];
+    //.champion.metaSave[]; // removing this to run explicitly in rdb.0
     };
 
 .champion.metaSave:{

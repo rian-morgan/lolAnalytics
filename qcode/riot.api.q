@@ -17,13 +17,14 @@
     d[`revisionDate]:"P"$string `long$d[`revisionDate]; // need a test for this timestamp conversion, riot changed recently
     d
     };
-
+// .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:()!()]
 // .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:enlist[`champion]!enlist[86]]
-.api.get.match.matchListByAccountId:{[region;accountId;filters]
+.api.get.match.matchListByAccountId:{[region;accountId;filters] // TODO cycle thru all matches 
+    ind:`beginIndex`endIndex!(0;100);
     req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
     q:$[0=count value[filters];
         "";
-        "-d ",-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")];
+        "-d '",(-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")),"'"];
     query:q;
     d:.j.k raze system"curl -G ",req," -H 'X-Riot-Token:",.api.key,"' ",query;
     k:select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from d[`matches];
@@ -87,6 +88,7 @@
  
  // .discord.myLastMatch[id:`278255127393992704;filters:`]
 .discord.myLastMatch:{[id;filters]
+    // TODO currently 4 requests to api, this can be reduced by cacheing/ storing player info
     player:.discord.get.summoner.byName[id]; /id:`278255127393992704 < Tenadoul
     acc:.api.get.summoner.byName[player[`region];player[`name]];
     champs:value exec id,championNumber from .champion.meta;

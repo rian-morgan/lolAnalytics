@@ -30,4 +30,8 @@ system"l ",getenv[`KDBSRC],"/require.q"
 .discord.loadAccountMx[];
 
 // load champion metadata
-.champion.metaLoad[];
+//.champion.metaLoad[];
+
+// pull new champion data only on rdb.0 and push it to other slave rdb
+if[(x:`lolStats.rdb.0) like .proc.args.procname; .champion.metaLoad[]; .champion.metaSave[]; .util.ipc.pull[;{.champion.meta:x;.log.info["Recieved .champion.meta from rdb.0"]};.champion.meta] each (exec procname from .proc.manifest where procname like "lolStats.rdb.*") except x];
+

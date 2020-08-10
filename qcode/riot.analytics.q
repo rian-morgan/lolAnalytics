@@ -46,12 +46,8 @@
     matches:data[`matches];
     matchId:exec gameId from matches where queue within (400;440); // que cond ensures only 5v5 on summoners rift
     if[not games=0;matchId:games sublist matchId];
-    t:.match.stats.get[region;]'[string matchId];
-    /cls:distinct raze cols each t;
-    /ncls:except[cls;]'[cols each t];
-    /upd:{cc:count x;t:$[1=count x;enlist[x];x];t!cc#enlist(#;(count;`i);())};
-    /nupd:upd'[ncls];
-    /tt:{![x;();0b;y]}'[t;nupd]
+    //t:.match.stats.get[region;] each string matchId;
+    t:.match.stats.get[region;] peach string matchId; //use when slave processes are available
     id:`$accountId;
     playerStats:?[uj/[t];enlist (in;`accountId;`id);0b;()];
     champs:value exec id,championNumber from .champion.meta;
@@ -59,3 +55,5 @@
     playerStats:update champMap@championId from playerStats;
     playerStats
     };
+    
+ 
