@@ -40,13 +40,16 @@
     `participantId`summonerName`accountId`gameId`championId xcols matchStats
     };
 
-// px:.player.stats.get[region:.api.host[`euw];accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";games:10;filters:enlist[`champion]!enlist[86]]   
-.player.stats.get:{[region;accountId;games;filters]
-    data:.api.get.match.matchListByAccountId[region;accountId;filters];
-    matches:data[`matches];
+// px:.player.stats.get[region:.api.host[`euw];accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";games:0;filters:enlist[`champion]!enlist[86]]  
+//.player.stats.get x:`region`accountId`sDatetime`eDatetime`filters!(.api.host[`euw];"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";"p"$.z.d-150D;.z.p;enlist[`champion]!enlist[86])
+.player.stats.get:{ //[region;accountId;games;filters]
+    op:`region`accountId`sDatetime`eDatetime`filters`games!("";"";-0Wp;.z.p;()!();0);$[99h~type x;op:op,x;op];
+    data:.api.get.match.matchListByAccountId[op[`region];op[`accountId];op[`filters]];
+    data:select from data where timestamp within (op[`sDatetime];op[`eDatetime]);
+    //matches:data[`matches];
+    matches:data;
     matchId:exec gameId from matches where queue within (400;440); // que cond ensures only 5v5 on summoners rift
-    if[not games=0;matchId:games sublist matchId];
-    //t:.match.stats.get[region;] each string matchId;
+    if[not op[`games]=0;matchId:games sublist matchId];
     t:.match.stats.get[region;] peach string matchId; //use when slave processes are available
     id:`$accountId;
     playerStats:?[uj/[t];enlist (in;`accountId;`id);0b;()];
@@ -55,5 +58,4 @@
     playerStats:update champMap@championId from playerStats;
     playerStats
     };
-    
  
