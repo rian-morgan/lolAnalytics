@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Stats</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>My Stats</h1>
+      <h2>Bunch of LoL stats</h2>
+      <canvas id="myChart" width="1600" height="900"></canvas>
+      <script src="../js/script.js"></script>
+      <button class='element' id="addData" onclick="getData('kda')">KDA</button>
+      <button class='element' id="addData" onclick="getData('visionScore')">Vision Score</button>
+      <button class='element' id="addData" onclick="getData('csPerMin')">CS per min</button>
+
+      <script>
+        	/*document.getElementById('addData').addEventListener('click', function getData() {
+            console.log('adding data')
+            socket.addEventListener('message', function _getData(event) {
+              let data = JSON.parse(event.data);
+              console.log(data)
+              myChart.data.datasets.push(data);
+              myChart.update();
+              socket.removeEventListener('message', _getData, false);
+            });
+            socket.send('.web.getMyStats[`kda]')
+
+	        });*/
+      </script>
+    </div>
+
+  </body>
+</html>

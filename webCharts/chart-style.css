@@ -1,0 +1,14 @@
+body {
+    align-items: center;
+    background-color: #afd275;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+  }
+
+.element {
+    border-radius: 23px;
+    background: #4c94bd;
+    box-shadow:  6px 6px 21px #396f8e, 
+                -6px -6px 21px #5fb9ec;
+}
