@@ -9,6 +9,7 @@
 .api.status:"/lol/status/v3/shard-data/";
 .api.summoners:"/lol/summoner/v4/summoners/";
 .api.match:"/lol/match/v4";
+
 //name:"Tenadoul"
 .api.get.summoner.byName:{[region;name]
     req:"https://",region,.api.summoners,"by-name/",name;
@@ -17,20 +18,30 @@
     d[`revisionDate]:"P"$string `long$d[`revisionDate]; // need a test for this timestamp conversion, riot changed recently
     d
     };
+    
 // .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:()!()]
-// .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:enlist[`champion]!enlist[86]]
-.api.get.match.matchListByAccountId:{[region;accountId;filters] // TODO cycle thru all matches 
-    ind:`beginIndex`endIndex!(0;100);
-    req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
-    q:$[0=count value[filters];
-        "";
-        "-d '",(-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")),"'"];
-    query:q;
-    d:.j.k raze system"curl -G ",req," -H 'X-Riot-Token:",.api.key,"' ",query;
-    k:select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from d[`matches];
-    d[`matches]:k;
-    d
-    };
+// .api.get.match.matchListByAccountId[region:.api.host`euw;accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";filters:enlist[`champion]!enlist[10]]
+.api.get.match.matchListByAccountId:{[region;accountId;filters] 
+    //if[not ()~filters[`beginTime];filters:filters,enlist[`beginTime]!enlist[`$.convert.toEpoch[filters[`beginTime]]]];
+    //if[not ()~filters[`endTime];filters:filters,enlist[`endTime]!enlist[`$.convert.toEpoch[filters[`endTime]]]];
+    res:flip `platformId`gameId`champion`queue`season`timestamp`role`lane!(();`float$();`float$();`float$();`float$();`float$();();());
+    ind:enlist[`beginIndex]!enlist[0];
+    
+    res:{[res;ind;filters]
+        filters:filters,ind;
+        req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
+        q:$[0=count value[filters];
+            "";
+            "-d '",(-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")),"'"];
+        query:q;
+        d:.j.k raze system"curl -G ",req," -H 'X-Riot-Token:",.api.key,"' ",query;
+        res:res,d[`matches];
+        ind[`beginIndex]:ind[`beginIndex]+100;
+        $[0<count d[`matches];.z.s [res;ind;filters];res]
+        }[res;ind;filters];
+    res: distinct select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from res;
+    res
+    }
 
 .api.get.match.matchListBySummonerName:{[region;name]
     accountId:.api.get.summoner.byName[region;name]`accountId;

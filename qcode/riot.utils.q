@@ -39,3 +39,5 @@ handles:`u#`int$();
     };
 
 .util.ipc.mapProcAlias:{hsym[`$":"sv string raze  value exec  host,port from .proc.manifest where procname in x]}; //TODO deal with env vars in proc manifest
+
+.util.toEpoch:{-6_string "j"$"p"$x - "p"$1970.01.01};

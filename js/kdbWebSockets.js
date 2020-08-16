@@ -2,7 +2,7 @@
 const WebSocket = require('ws');
 
 // Create WebSocket connection.
-const socket = new WebSocket('ws://localhost:5000');
+const socket = new WebSocket('ws://localhost:50000');
 
 // Connection opened
 socket.addEventListener('open', function (event) {
