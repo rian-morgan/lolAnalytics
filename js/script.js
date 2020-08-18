@@ -5,22 +5,15 @@ const socket = new WebSocket("ws://localhost:50000");
 // Connection opened
 socket.addEventListener('open', function (event) {
     console.log('Opened connection to kdb')
+    getContext();
+
+
 });
-
-// Listen for messages
-/*socket.addEventListener('message', function (event) {
-    console.log('Message from server:\n' + event.data);
-    console.log(typeof event.data);
-    console.log(JSON.parse(event.data));
-    //mydata1.datasets[0].data = JSON.parse(event.data)
-    window.dt = JSON.parse(event.data)
-    return (JSON.parse(event.data))
-});*/
-
 
 // declare the chart element as a variable
 var ctx = document.getElementById('myChart');
-
+ctx.setAttribute('class','element');
+ctx.style.backgroundColor = 'rgba(255,255,255,0.05)';
 myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -29,6 +22,7 @@ myChart = new Chart(ctx, {
         },
     options: {
         scales: {
+
             yAxes: [{
                 stacked: false,
                 position: 'right',
@@ -44,6 +38,8 @@ myChart = new Chart(ctx, {
                     unit: 'day'
                 },
                 ticks:{
+                    //bounds: 'data',
+
                     source: 'data'
                 },
             }]
@@ -72,10 +68,63 @@ function getData(e) {
     socket.addEventListener('message', function _getData(event) {
       let data = JSON.parse(event.data);
       console.log(data)
-      myChart.data.datasets.push(data);
-      myChart.update();
+      if(data != "'type") {
+        myChart.data.datasets.push(data);
+        myChart.update();
+        };
       socket.removeEventListener('message', _getData, false);
     });
-    socket.send(`.web.getMyStats[\`${e}]`)
+    let req = `.web.get.myStats[\`${context.activeRegion};"${context.activeAccount}";\`${context.activeChampion};\`${e}]`;
+    console.log(req);
+    socket.send(req)
 
     };
+
+function getContext() {
+    console.log('Getting Context');
+    socket.addEventListener('message', function _getContext(event) {
+        let data = JSON.parse(event.data);
+        console.log(data);
+        window.context = data;
+
+        context.accounts.forEach(e=>{
+            let menuItem = document.createElement('div');
+            menuItem.setAttribute('class','menuItem');
+            menuItem.innerHTML = e;
+            menuItem.onclick = function() {
+                context.activeAccount = e;
+                document.getElementById('player-dropdown-btn').innerText = e};
+            console.log(menuItem);
+            let playerContent = document.getElementById('player-dropdown-content');
+            playerContent.appendChild(menuItem);
+            });
+        
+        context.regions.forEach(e=>{
+            let menuItem = document.createElement('div');
+            menuItem.setAttribute('class','menuItem');
+            menuItem.innerHTML = e;
+            menuItem.onclick = function() {
+                context.activeRegion = e;
+                document.getElementById('region-dropdown-btn').innerText = e};
+            console.log(menuItem);
+            let regionContent = document.getElementById('region-dropdown-content');
+            regionContent.appendChild(menuItem);
+            });
+        
+        context.champion.forEach(e=>{
+            let menuItem = document.createElement('div');
+            menuItem.setAttribute('class','menuItem');
+            menuItem.innerHTML = e;
+            menuItem.onclick = function() {
+                context.activeChampion = e;
+                document.getElementById('champion-dropdown-btn').innerText = e};
+            console.log(menuItem);
+            let championContent = document.getElementById('champion-dropdown-content');
+            championContent.appendChild(menuItem);
+            });
+
+        socket.removeEventListener('message', _getContext, false);
+    });
+    socket.send(`makeContext[]`)
+};
+
