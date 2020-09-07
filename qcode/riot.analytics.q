@@ -49,13 +49,33 @@
     //matches:data[`matches];
     matches:data;
     matchId:exec gameId from matches where queue within (400;440); // que cond ensures only 5v5 on summoners rift
-    if[not op[`games]=0;matchId:games sublist matchId];
-    t:.match.stats.get[region;] peach string matchId; //use when slave processes are available
-    id:`$accountId;
-    playerStats:?[uj/[t];enlist (in;`accountId;`id);0b;()];
+    if[not op[`games]=0;matchId:op[`games] sublist matchId];
+    t:.match.stats.get[op[`region];] peach string matchId; //use when slave processes are available
+    id:`$op[`accountId];
+    playerStats:?[uj/[t];enlist (in;`accountId;`id);0b;()]; //select only players matches
     champs:value exec id,championNumber from .champion.meta;
     champMap:champs[1]!champs[0];
     playerStats:update champMap@championId from playerStats;
     playerStats
+    };
+    
+.web.get.myStats:{[region;accountName;champion;stat]
+    accountId:.api.get.summoner.byName[.api.host[region];accountName][`accountId];
+    champs:value exec id,championNumber from .champion.meta;
+    champMap:champs[0]!champs[1];
+    px:.player.stats.get[x:`region`accountId`filters!(.api.host[region];accountId;enlist[`champion]!enlist[champMap@champion])];
+    px:update kda:(kills+assists)%?[deaths=0;1;deaths], csPerMin:60*totalMinionsKilled%gameDuration from px;
+    color:"," sv string (3?til 256);
+    border:"rgba(",color,",1)";
+    bgColor:"rgba(",color,",0.2)";
+    `label`data`borderColor`backgroundColor!(string stat;?[`px;();0b;`x`y!(`gameCreation;stat)];border;bgColor)
+    };
+    
+makeContext:{
+    accounts:exec lolAccount from .discord.accountMx;
+    regions:exec distinct lolRegion from .discord.accountMx;
+    champion:exec id from .champion.meta;
+    context:`accounts`regions`champion!(accounts;regions;champion);
+    context
     };
  

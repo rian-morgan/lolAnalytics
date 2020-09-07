@@ -26,10 +26,9 @@
     //if[not ()~filters[`endTime];filters:filters,enlist[`endTime]!enlist[`$.convert.toEpoch[filters[`endTime]]]];
     res:flip `platformId`gameId`champion`queue`season`timestamp`role`lane!(();`float$();`float$();`float$();`float$();`float$();();());
     ind:enlist[`beginIndex]!enlist[0];
-    
-    res:{[res;ind;filters]
+    req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
+    res:{[res;ind;filters;req]
         filters:filters,ind;
-        req:"https://",region,.api.match,"/matchlists/by-account/",accountId;
         q:$[0=count value[filters];
             "";
             "-d '",(-1_raze raze string each flip k cut key[filters],(k#`$"="),value[filters],((k:count[filters])#`$"&")),"'"];
@@ -37,11 +36,11 @@
         d:.j.k raze system"curl -G ",req," -H 'X-Riot-Token:",.api.key,"' ",query;
         res:res,d[`matches];
         ind[`beginIndex]:ind[`beginIndex]+100;
-        $[0<count d[`matches];.z.s [res;ind;filters];res]
-        }[res;ind;filters];
+        $[0<count d[`matches];.z.s [res;ind;filters;req];res]
+        }[res;ind;filters;req];
     res: distinct select `$platformId,`long$gameId,champion,queue,season,`$role,`$lane,"P"$-3_'string `long$timestamp from res;
     res
-    }
+    };
 
 .api.get.match.matchListBySummonerName:{[region;name]
     accountId:.api.get.summoner.byName[region;name]`accountId;
