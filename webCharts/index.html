@@ -10,21 +10,30 @@
     <div class="wrapper">
       <h1>My Stats</h1>
       <h2>Bunch of LoL stats</h2>
-      <div id="player-dropdown" class="dropdown">
-        <button id='player-dropdown-btn' class="dropbtn">Select Account</button>
-        <div id="player-dropdown-content" class="dropdown-content">
-        </div>
+      <form action="/action_page.php">
+        <label for="sDate">From:</label>
+        <input type="date" id="sDate" name="sDate">
+        <label for="sDate">To:</label>
+        <input type="date" id="eDate" name="eDate">
+      </form>
       </div>
-      <div id="region-dropdown" class="dropdown">
-        <button id='region-dropdown-btn' class="dropbtn">Select Region</button>
-        <div id="region-dropdown-content" class="dropdown-content">
+      <div>
+        <div id="player-dropdown" class="dropdown">
+          <button id='player-dropdown-btn' class="dropbtn">Select Account</button>
+          <div id="player-dropdown-content" class="dropdown-content">
+          </div>
         </div>
-      </div>      
-      <div id="champion-dropdown" class="dropdown">
-        <button id='champion-dropdown-btn' class="dropbtn">Select Champion</button>
-        <div id="champion-dropdown-content" class="dropdown-content">
+        <div id="region-dropdown" class="dropdown">
+          <button id='region-dropdown-btn' class="dropbtn">Select Region</button>
+          <div id="region-dropdown-content" class="dropdown-content">
+          </div>
+        </div>      
+        <div id="champion-dropdown" class="dropdown">
+          <button id='champion-dropdown-btn' class="dropbtn">Select Champion</button>
+          <div id="champion-dropdown-content" class="dropdown-content">
+          </div>
         </div>
-      </div>
+    </div>
       <canvas id="myChart" width="1600" height="900"></canvas>
       <script src="../js/script.js"></script>
       <button class='element' id="addData" onclick="getData('kda')">KDA</button>

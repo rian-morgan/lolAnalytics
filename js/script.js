@@ -74,7 +74,9 @@ function getData(e) {
         };
       socket.removeEventListener('message', _getData, false);
     });
-    let req = `.web.get.myStats[\`${context.activeRegion};"${context.activeAccount}";\`${context.activeChampion};\`${e}]`;
+    let sDate = document.querySelector('#sDate').value;
+    let eDate = document.querySelector('#eDate').value;
+    let req = `.web.get.myStats[\`${context.activeRegion};"${context.activeAccount}";\`${context.activeChampion};\`${e};"${sDate}";"${eDate}"]`;
     console.log(req);
     socket.send(req)
 
@@ -84,7 +86,7 @@ function getContext() {
     console.log('Getting Context');
     socket.addEventListener('message', function _getContext(event) {
         let data = JSON.parse(event.data);
-        console.log(data);
+        //console.log(data);
         window.context = data;
 
         context.accounts.forEach(e=>{
@@ -94,7 +96,7 @@ function getContext() {
             menuItem.onclick = function() {
                 context.activeAccount = e;
                 document.getElementById('player-dropdown-btn').innerText = e};
-            console.log(menuItem);
+            //console.log(menuItem);
             let playerContent = document.getElementById('player-dropdown-content');
             playerContent.appendChild(menuItem);
             });
@@ -106,7 +108,7 @@ function getContext() {
             menuItem.onclick = function() {
                 context.activeRegion = e;
                 document.getElementById('region-dropdown-btn').innerText = e};
-            console.log(menuItem);
+            //console.log(menuItem);
             let regionContent = document.getElementById('region-dropdown-content');
             regionContent.appendChild(menuItem);
             });
@@ -118,7 +120,7 @@ function getContext() {
             menuItem.onclick = function() {
                 context.activeChampion = e;
                 document.getElementById('champion-dropdown-btn').innerText = e};
-            console.log(menuItem);
+            //console.log(menuItem);
             let championContent = document.getElementById('champion-dropdown-content');
             championContent.appendChild(menuItem);
             });
