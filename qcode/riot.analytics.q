@@ -41,7 +41,7 @@
     };
 
 // px:.player.stats.get[region:.api.host[`euw];accountId:"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";games:0;filters:enlist[`champion]!enlist[86]]  
-//.player.stats.get x:`region`accountId`sDatetime`eDatetime`filters!(.api.host[`euw];"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";"p"$.z.d-150D;.z.p;enlist[`champion]!enlist[86])
+//.player.stats.get x:`region`accountId`sDatetime`eDatetime`filters!(.api.host[`euw];"cwNgwUdB3IpTb08PB5VounuqCRC3JuBThZtAX64YCZZ_3tM";"p"$.z.d-250D;.z.p;enlist[`champion]!enlist[86])
 .player.stats.get:{ //[region;accountId;games;filters]
     op:`region`accountId`sDatetime`eDatetime`filters`games!("";"";-0Wp;.z.p;()!();0);$[99h~type x;op:op,x;op];
     data:.api.get.match.matchListByAccountId[op[`region];op[`accountId];op[`filters]];
@@ -58,19 +58,21 @@
     playerStats:update champMap@championId from playerStats;
     playerStats
     };
-    
-.web.get.myStats:{[region;accountName;champion;stat]
+
+.web.get.myStats:{[region;accountName;champion;stat;sDatetime;eDatetime]
     accountId:.api.get.summoner.byName[.api.host[region];accountName][`accountId];
     champs:value exec id,championNumber from .champion.meta;
     champMap:champs[0]!champs[1];
-    px:.player.stats.get[x:`region`accountId`filters!(.api.host[region];accountId;enlist[`champion]!enlist[champMap@champion])];
-    px:update kda:(kills+assists)%?[deaths=0;1;deaths], csPerMin:60*totalMinionsKilled%gameDuration from px;
+    sDatetime:"P"$sDatetime;
+    eDatetime:"P"$eDatetime;
+    px:.player.stats.get[x:`region`accountId`filters`games`sDatetime`eDatetime!(.api.host[region];accountId;enlist[`champion]!enlist[champMap@champion];5;sDatetime;eDatetime)];
+    px:update kda:(kills+assists)%?[deaths=0;1;deaths], csPerMin:60*totalMinionsKilled%gameDuration from px;  
     color:"," sv string (3?til 256);
     border:"rgba(",color,",1)";
     bgColor:"rgba(",color,",0.2)";
-    `label`data`borderColor`backgroundColor!(string stat;?[`px;();0b;`x`y!(`gameCreation;stat)];border;bgColor)
+    `label`data`borderColor`backgroundColor!(stat;?[px;();0b;`x`y!(`gameCreation;stat)];border;bgColor)
     };
-    
+            
 makeContext:{
     accounts:exec lolAccount from .discord.accountMx;
     regions:exec distinct lolRegion from .discord.accountMx;
