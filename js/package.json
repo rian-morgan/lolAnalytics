@@ -13,7 +13,7 @@
   "author": "Rian Morgan",
   "license": "ISC",
   "dependencies": {
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0"
   }
